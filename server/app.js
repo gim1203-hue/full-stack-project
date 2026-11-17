@@ -4,8 +4,10 @@ import {dirname} from 'node:path';
 import {randomUUID} from 'node:crypto';
 import {products} from './products.js';
 import {cors} from './cors.js';
+import {chatRouter} from './chat.js';
 export async function createApp(file,{allowedOrigins=[]}={}){
- const app=express();app.disable('x-powered-by');app.use('/api',cors(allowedOrigins));app.use(express.json({limit:'20kb'}));let orders=[];
+ const app=express();app.disable('x-powered-by');app.use('/api',cors(allowedOrigins));app.use(express.json({limit:'128kb'}));let orders=[];
+ app.use('/api/chat',chatRouter());
  try{orders=JSON.parse(await readFile(file,'utf8'));}catch(e){if(e.code!=='ENOENT')throw e;}
  if(!Array.isArray(orders))throw new Error('Order storage must contain a JSON array. Restore the orders file before starting the server.');
  app.use('/api/orders',(q,r,next)=>{if(q.method==='POST'&&!q.is('application/json'))return r.status(415).json({error:'Send the order as application/json.'});next();});

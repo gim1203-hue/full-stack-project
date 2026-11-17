@@ -7,7 +7,7 @@ export function cors(allowedOrigins = []) {
     if (origin && allowed.has(origin)) {
       res.set('Access-Control-Allow-Origin', origin);
       res.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-      res.set('Access-Control-Allow-Headers', 'Content-Type');
+      res.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     }
     if (req.method === 'OPTIONS') {
       return origin && !allowed.has(origin)

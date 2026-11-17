@@ -1,4 +1,5 @@
 import {products} from '../../server/products.js';
+import {demoReply} from '../../server/demo-ai.js';
 
 const backend = (import.meta.env.VITE_API_URL || '').trim().replace(/\/+$/, '');
 if (backend && !/^https?:\/\/[^/]+$/.test(backend)) throw new Error('VITE_API_URL must be a server origin, such as https://api.example.com, without /api.');
@@ -8,6 +9,8 @@ export async function api(url, options) {
   if (staticPreview) {
     if (options?.signal?.aborted) throw new DOMException('Aborted', 'AbortError');
     const request = new URL(url, window.location.origin);
+    if (request.pathname === '/api/chat/config') return {mode:'demo',authRequired:false};
+    if (request.pathname === '/api/chat') return demoReply(JSON.parse(options.body).messages);
     if (request.pathname === '/api/products') {
       const category = request.searchParams.get('category') || 'All';
       const query = (request.searchParams.get('q') || '').toLowerCase();

@@ -6,6 +6,16 @@
 
 An original Amazon-inspired shopping demo: product catalog, search, categories, sorting, favorites, product details, persistent shopping bag, quantity controls, and a working demo checkout.
 
+**New: [Lane AI assistant](https://gim1203-hue.github.io/full-stack-project/#assistant).** A complete chat interface with a labelled no-key scripted demo and optional server-side OpenAI integration. See [AI_SETUP.md](AI_SETUP.md) for setup and limits.
+
+## Showcase pictures
+
+Actual desktop screenshots of the local app. The assistant is shown in scripted demo mode.
+
+![Market Lane storefront](showcase/market-lane-storefront.jpg)
+
+![Lane AI assistant](showcase/lane-ai-assistant.jpg)
+
 **Backend deployment and connection:** [DEPLOY_BACKEND.md](DEPLOY_BACKEND.md). GitHub Pages can now connect to a hosted Node.js API using the `BACKEND_URL` repository variable. Without a backend URL it stays a frontend preview.
 
 ## Run the full-stack app
