@@ -6,7 +6,7 @@
 
 An original Amazon-inspired shopping demo: product catalog, search, categories, sorting, favorites, product details, persistent shopping bag, quantity controls, and a working demo checkout.
 
-**New: [Lane AI assistant](https://gim1203-hue.github.io/full-stack-project/#assistant).** A complete chat interface with a labelled no-key scripted demo and optional server-side OpenAI integration. See [AI_SETUP.md](AI_SETUP.md) for setup and limits.
+**[Lane shopping assistant](https://gim1203-hue.github.io/full-stack-project/#assistant).** Finds matching catalog products and asks questions about customer needs and problems. It does not answer general-purpose questions. No-key catalog matching works on Pages; an optional server-side model can generate relevant shopping follow-ups. See [AI_SETUP.md](AI_SETUP.md).
 
 ## Showcase pictures
 

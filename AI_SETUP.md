@@ -4,7 +4,7 @@ Open the store and select **Ask Lane AI**, or visit the Pages URL with `#assista
 
 ## Available now: scripted demo
 
-Without an AI key, chat works on GitHub Pages and on the Node server using a small response library. It demonstrates conversation UI, product suggestions, project explanations, learning plans, writing, and extractive summarization. It is explicitly labeled **Scripted demo**. Unknown questions get an honest limitation message, not invented facts. This mode is not a trained model or an autonomous agent.
+Without an AI key, chat works on GitHub Pages and on the Node server as a product-only catalog guide. It matches product types, categories, customer problems, and budget constraints, then asks relevant shopping questions. Results appear as catalog cards with real sample prices and product-detail links. If nothing matches, it does not show unrelated products. General-purpose requests, including writing and coding, are redirected to shopping. This mode is not a trained model or an autonomous agent.
 
 Conversation history stays in React memory and clears when leaving or refreshing the assistant. Only the latest 19 messages are sent for each new question; each history entry is limited to 4,000 characters. No chat is saved to the orders file.
 
@@ -28,7 +28,9 @@ The live endpoint requires the access code, limits messages and output size, has
 
 ## Capabilities and limits
 
-The connected model supports open-ended text conversation. It has no browsing, live account access, command execution, payment, or external-action tools. It cannot answer everything reliably or act autonomously. Verify important answers. Demo mode does not make medical, financial, legal, or live-news claims.
+The connected model only generates up to two questions about the customer’s product needs, intended use, budget, compatibility, size, or preferences. Product matching is performed by the server against the catalog, not invented by the model. General requests do not reach the model. The model's raw answer is never displayed; only validated question strings are used, with catalog-guided fallback questions if the format is invalid.
+
+Lane has no browsing, live account access, command execution, payment, or external-action tools. It cannot check private orders, place purchases, or submit returns. Customer-support questions clarify the problem without claiming an action was taken.
 
 Endpoints:
 

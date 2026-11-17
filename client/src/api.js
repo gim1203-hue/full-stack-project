@@ -11,6 +11,7 @@ export async function api(url, options) {
     const request = new URL(url, window.location.origin);
     if (request.pathname === '/api/chat/config') return {mode:'demo',authRequired:false};
     if (request.pathname === '/api/chat') return demoReply(JSON.parse(options.body).messages);
+    if (request.pathname.startsWith('/api/products/')) {const product=products.find(p=>p.id===request.pathname.split('/').at(-1));if(!product)throw Error('Product not found');return product;}
     if (request.pathname === '/api/products') {
       const category = request.searchParams.get('category') || 'All';
       const query = (request.searchParams.get('q') || '').toLowerCase();
