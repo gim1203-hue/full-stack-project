@@ -6,6 +6,8 @@
 
 An original Amazon-inspired shopping demo: product catalog, search, categories, sorting, favorites, product details, persistent shopping bag, quantity controls, and a working demo checkout.
 
+**Backend deployment and connection:** [DEPLOY_BACKEND.md](DEPLOY_BACKEND.md). GitHub Pages can now connect to a hosted Node.js API using the `BACKEND_URL` repository variable. Without a backend URL it stays a frontend preview.
+
 ## Run the full-stack app
 
 Requires Node.js 20.19+ or 22.12+.
@@ -68,7 +70,7 @@ For a public commerce service, add a database, authentication, payment provider,
 
 The included GitHub Actions workflow tests the backend, builds React with `VITE_STATIC_PREVIEW=true` and the repository base path, then deploys `dist` to Pages. In repository Settings → Pages, choose **GitHub Actions** as the source.
 
-GitHub Pages hosts static files and cannot run the Node.js server. The Pages version uses the same bundled sample catalog for search, sorting, product details, and cart interactions. It shows a preview banner and disables checkout. This is a frontend showcase of the full-stack source, not a live backend deployment.
+GitHub Pages hosts static files and cannot run the Node.js server. Without `BACKEND_URL`, the Pages version uses the bundled sample catalog, shows a preview banner, and disables checkout. When `BACKEND_URL` is configured and the site is rebuilt, it calls the hosted Node.js API and enables demo checkout. See [backend setup](DEPLOY_BACKEND.md).
 
 ## Deploy the full React + Node application
 

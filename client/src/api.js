@@ -1,6 +1,8 @@
 import {products} from '../../server/products.js';
 
-export const staticPreview = import.meta.env.VITE_STATIC_PREVIEW === 'true';
+const backend = (import.meta.env.VITE_API_URL || '').trim().replace(/\/+$/, '');
+if (backend && !/^https?:\/\/[^/]+$/.test(backend)) throw new Error('VITE_API_URL must be a server origin, such as https://api.example.com, without /api.');
+export const staticPreview = import.meta.env.VITE_STATIC_PREVIEW === 'true' && !backend;
 
 export async function api(url, options) {
   if (staticPreview) {
@@ -18,7 +20,14 @@ export async function api(url, options) {
     }
     throw new Error('Checkout needs the Node.js backend. Run the full-stack project using the repository setup instructions.');
   }
-  const response = await fetch(url, options);
+  let response;
+  try { response = await fetch(backend + url, options); }
+  catch (error) {
+    if (error.name === 'AbortError') throw error;
+    throw new Error('Cannot reach the Node.js backend. Check its URL, server status, and ALLOWED_ORIGINS setting.');
+  }
+  const contentType = response.headers.get('content-type') || '';
+  if (!contentType.includes('application/json')) throw new Error('The backend returned a web page instead of API JSON. Check VITE_API_URL and the server deployment.');
   const body = await response.json();
   if (!response.ok) throw new Error(body.error || 'Please try again.');
   return body;
