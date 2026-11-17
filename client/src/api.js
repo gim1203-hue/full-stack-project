@@ -1,4 +1,5 @@
 import {products} from '../../server/products.js';
+import {searchCatalog} from '../../server/catalog.js';
 import {demoReply} from '../../server/demo-ai.js';
 
 const backend = (import.meta.env.VITE_API_URL || '').trim().replace(/\/+$/, '');
@@ -12,16 +13,7 @@ export async function api(url, options) {
     if (request.pathname === '/api/chat/config') return {mode:'demo',authRequired:false};
     if (request.pathname === '/api/chat') return demoReply(JSON.parse(options.body).messages);
     if (request.pathname.startsWith('/api/products/')) {const product=products.find(p=>p.id===request.pathname.split('/').at(-1));if(!product)throw Error('Product not found');return product;}
-    if (request.pathname === '/api/products') {
-      const category = request.searchParams.get('category') || 'All';
-      const query = (request.searchParams.get('q') || '').toLowerCase();
-      const sort = request.searchParams.get('sort');
-      const result = products.filter(p => (category === 'All' || category === p.category) && (p.name + ' ' + p.category + ' ' + p.description).toLowerCase().includes(query));
-      if (sort === 'price-asc') result.sort((a,b) => a.price - b.price);
-      if (sort === 'price-desc') result.sort((a,b) => b.price - a.price);
-      if (sort === 'rating') result.sort((a,b) => b.rating - a.rating);
-      return result;
-    }
+    if (request.pathname === '/api/products') return searchCatalog(Object.fromEntries(request.searchParams));
     throw new Error('Checkout needs the Node.js backend. Run the full-stack project using the repository setup instructions.');
   }
   let response;

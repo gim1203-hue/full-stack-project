@@ -6,6 +6,8 @@
 
 An original Amazon-inspired shopping demo: product catalog, search, categories, sorting, favorites, product details, persistent shopping bag, quantity controls, and a working demo checkout.
 
+The fictional catalog contains **80 products, 16 per category**, including eight options for each core product family. Search matches multiple words in any order. The all-products view starts with 32 cards and supports loading more. Categories and assistant results stay relevant to the selected type and budget. Product imagery is illustrative, not an exact representation of each fictional edition.
+
 **[Lane shopping assistant](https://gim1203-hue.github.io/full-stack-project/#assistant).** Finds matching catalog products and asks questions about customer needs and problems. It does not answer general-purpose questions. No-key catalog matching works on Pages; an optional server-side model can generate relevant shopping follow-ups. See [AI_SETUP.md](AI_SETUP.md).
 
 ## Showcase pictures
